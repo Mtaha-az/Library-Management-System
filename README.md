@@ -2,175 +2,146 @@
 
 A database-driven Library Management System developed as a university project using PHP, MySQL, HTML, CSS, JavaScript, and XAMPP.
 
-![Library Management System](lms.png)
+![Library Management System](assets/images/lms.png)
 
 ## 📌 Project Overview
 
-The Library Management System provides separate workflows for **administrators** and **students** to handle basic library operations.
+The system provides separate workflows for **administrators** and **students** to handle basic library operations.
 
-The project demonstrates how a PHP web application can connect to a MySQL database and provide authentication, book management, student management, book searching, and book-request workflows.
+It demonstrates PHP/MySQL authentication, session-based access, book management, student management, book searching, and book-request approval.
 
 ## ✨ Features
 
-### Admin Features
-
+### Admin
 - Admin registration and login
-- Add books
-- Add students
-- View and manage book requests
-- Approve or decline book requests
-- Admin dashboard
+- Add books and students
+- View, approve, and decline book requests
+- Admin account details dashboard
 
-### Student Features
-
+### Student
 - Student login
-- Student dashboard
-- Search for books
+- Student profile dashboard
+- Search books by title
 - Submit book requests
-- View book-related information
+- View submitted requests
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies
 
-- **PHP** — Server-side application logic
-- **MySQL** — Database management
-- **HTML** — Page structure
-- **CSS** — Styling and layout
-- **JavaScript** — Client-side interactions and form handling
-- **XAMPP** — Local Apache and MySQL development environment
-- **phpMyAdmin** — Database administration
+- PHP
+- MySQL
+- HTML5
+- CSS3
+- JavaScript
+- XAMPP / Apache
+- phpMyAdmin
 
 ## 📂 Project Structure
 
 ```text
 Library-Management-System/
 │
+├── admin/
+│   ├── admin_service_dashboard.php
+│   ├── addBook.php
+│   ├── addStudent.php
+│   └── requestsaction.php
+│
+├── student/
+│   ├── student_dashboard.php
+│   ├── searchBook.php
+│   ├── requestBook.php
+│   └── bookforrequest.php
+│
+├── auth/
+│   ├── register.php
+│   ├── loginadmin_server_page.php
+│   ├── studentLogin_server_page.php
+│   └── logout.php
+│
+├── includes/
+│   ├── db.php
+│   └── data_class.php
+│
 ├── assets/
 │   ├── css/
 │   │   └── style.css
-│   └── js/
-│       └── script.js
+│   ├── js/
+│   │   └── script.js
+│   └── images/
+│       ├── E1.jpg
+│       ├── lib3.jpg
+│       ├── lms.png
+│       ├── lock.png
+│       ├── person.png
+│       ├── persons.jpg
+│       └── unlock.png
 │
 ├── database/
 │   └── lms.sql
 │
-├── addBook.php
-├── addStudent.php
-├── admin_service_dashboard.php
-├── bookforrequest.php
-├── data_class.php
-├── db.php
 ├── index.php
-├── loginadmin_server_page.php
-├── logout.php
-├── register.php
-├── requestBook.php
-├── requestsaction.php
-├── searchBook.php
-├── studentLogin_server_page.php
-├── student_dashboard.php
-│
-├── E1.jpg
-├── lib3.jpg
-├── lms.png
-├── lock.png
-├── person.png
-├── persons.jpg
-├── unlock.png
 ├── .gitignore
 └── README.md
 ```
 
-The PHP files remain in the project root because they are directly used as the application's page and request endpoints. Frontend assets are separated into the `assets` directory, and the database export is kept in the `database` directory.
+The project is now organized by responsibility: **admin pages**, **student pages**, **authentication handlers**, **shared PHP/database code**, and **frontend assets** are separated into their own directories.
 
 ## ⚙️ Requirements
 
-Before running the project, install:
-
 - XAMPP
-- A modern web browser
-- Git (optional, if cloning the repository)
+- Modern web browser
+- Git (optional)
 
-## 🚀 Installation and Setup
+## 🚀 Installation
 
-### 1. Clone or copy the project
+### 1. Clone the repository
 
-Clone the repository into the XAMPP `htdocs` directory:
+Place the project inside XAMPP's `htdocs` directory:
 
 ```bash
 git clone https://github.com/Mtaha-az/Library-Management-System.git
 ```
 
-Alternatively, copy the project folder manually into:
+For example:
 
 ```text
-C:\xampp\htdocs\LMS
+C:\xampp\htdocs\Library-Management-System
 ```
 
 ### 2. Start XAMPP
 
-Open the XAMPP Control Panel and start:
+Start:
 
 - Apache
 - MySQL
 
-### 3. Create the database
+### 3. Import the database
 
-Open phpMyAdmin:
+Open:
 
 ```text
 http://localhost/phpmyadmin
 ```
 
-Create a database named:
-
-```text
-lms
-```
-
-### 4. Import the database
-
-Select the `lms` database in phpMyAdmin.
-
-Go to:
-
-**Import → Choose File**
-
-Select:
+Import:
 
 ```text
 database/lms.sql
 ```
 
-Then click **Import**.
+The SQL file creates the `lms` database and includes generic demo records.
 
-The SQL file creates the required tables and includes sample data for this academic project.
+> **Important:** The included SQL export resets the academic/demo tables when imported. Back up any local data you want to keep before importing it.
 
-### 5. Check the database configuration
+### 4. Run the project
 
-The project uses the following local XAMPP configuration:
-
-```text
-Host: localhost
-Username: root
-Password:
-Database: lms
-```
-
-These settings are intended for a local XAMPP installation.
-
-### 6. Run the project
-
-Open your browser and visit:
+Open:
 
 ```text
-http://localhost/LMS
+http://localhost/Library-Management-System/
 ```
-
-The Library Management System should now run locally.
 
 ## 🔑 Demo Accounts
-
-The included database provides demo accounts for local testing.
 
 **Admin**
 
@@ -186,44 +157,46 @@ Student ID: demo001
 Password: Demo123!
 ```
 
-These credentials are only for the included academic/demo database.
-## 🗄️ Database
+These credentials are for the included local/demo database only.
 
-The database contains tables for:
+## 🔐 Security Improvements
 
-- Administrators
-- Students
-- Books
-- Book requests
+The project has been cleaned up to use:
 
-The database export is available at:
+- `password_hash()` and `password_verify()` for passwords
+- MySQLi prepared statements for database operations
+- Basic server-side validation
+- Escaped database output with `htmlspecialchars()`
+- Session regeneration after successful login
+- Role checks on protected admin/student pages
+- UTF-8 / `utf8mb4` database connection
 
-```text
-database/lms.sql
-```
+This is still an **academic project**, not a production application. A production deployment would additionally need stronger configuration/secrets management, CSRF protection across all state-changing forms, rate limiting, stricter authorization, logging, and more extensive testing.
 
-## 🔐 Project Scope and Security
+## 🎨 UI Improvements
 
-This repository contains a **university/academic project** and is not intended for production deployment.
+The interface has been refactored into a shared responsive stylesheet with:
 
-The current version demonstrates the application's functionality and uses password hashing, prepared statements for major database operations, basic server-side validation, and output escaping. A production application would still require additional measures such as CSRF protection, stronger authorization controls, centralized secrets management, rate limiting, and more extensive testing.
-
-The database contains generic demo records used for testing the project.
+- Consistent cards, forms, buttons, and alerts
+- Responsive layouts for smaller screens
+- Separate admin and student navigation
+- Cleaner book and request cards
+- Improved login/register layout
+- Centralized colors and spacing using CSS variables
 
 ## 🎓 Project Purpose
 
-This project was developed to demonstrate practical experience with:
+This project demonstrates practical experience with:
 
 - PHP server-side development
 - MySQL database integration
-- CRUD-style database operations
 - Authentication and session handling
-- Role-based application workflows
+- CRUD-style database operations
+- Role-based workflows
 - HTML, CSS, and JavaScript
-- Local web application development using XAMPP
+- XAMPP-based local development
 
 ## 👨‍💻 Author
 
-**Muhammad Taha Ahmad**
-
+**Muhammad Taha Ahmad**  
 BS Computer Science
