@@ -44,22 +44,43 @@ The project demonstrates how a PHP web application can connect to a MySQL databa
 ```text
 Library-Management-System/
 │
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── script.js
+│
 ├── database/
 │   └── lms.sql
 │
-├── *.php
-├── style.css
-├── script.js
-├── lms.png
-├── lib3.jpg
+├── addBook.php
+├── addStudent.php
+├── admin_service_dashboard.php
+├── bookforrequest.php
+├── data_class.php
+├── db.php
+├── index.php
+├── loginadmin_server_page.php
+├── logout.php
+├── register.php
+├── requestBook.php
+├── requestsaction.php
+├── searchBook.php
+├── studentLogin_server_page.php
+├── student_dashboard.php
+│
 ├── E1.jpg
+├── lib3.jpg
+├── lms.png
 ├── lock.png
-├── unlock.png
 ├── person.png
 ├── persons.jpg
+├── unlock.png
 ├── .gitignore
 └── README.md
 ```
+
+The PHP files remain in the project root because they are directly used as the application's page and request endpoints. Frontend assets are separated into the `assets` directory, and the database export is kept in the `database` directory.
 
 ## ⚙️ Requirements
 
@@ -147,6 +168,25 @@ http://localhost/LMS
 
 The Library Management System should now run locally.
 
+## 🔑 Demo Accounts
+
+The included database provides demo accounts for local testing.
+
+**Admin**
+
+```text
+Email: demo@admin.library
+Password: Demo123!
+```
+
+**Student**
+
+```text
+Student ID: demo001
+Password: Demo123!
+```
+
+These credentials are only for the included academic/demo database.
 ## 🗄️ Database
 
 The database contains tables for:
@@ -166,9 +206,9 @@ database/lms.sql
 
 This repository contains a **university/academic project** and is not intended for production deployment.
 
-The current version demonstrates the application's functionality but still has areas that would need improvement before production use, including stronger password hashing, prepared SQL statements throughout the application, and additional security validation.
+The current version demonstrates the application's functionality and uses password hashing, prepared statements for major database operations, basic server-side validation, and output escaping. A production application would still require additional measures such as CSRF protection, stronger authorization controls, centralized secrets management, rate limiting, and more extensive testing.
 
-The database contains sample/dummy records used for testing the project.
+The database contains generic demo records used for testing the project.
 
 ## 🎓 Project Purpose
 
