@@ -14,15 +14,15 @@ $conn = $db->getConnection();
 
 $studentID = $_SESSION["studentsid"];
 $isbn = trim($_POST['isbn'] ?? '');
-$bookTitle = trim($_POST['bookTitle'] ?? '');
 
-if ($isbn === '' || $bookTitle === '') {
-    header("Location: student_dashboard.php?msg=Please+fill+in+fields");
+if ($isbn === '') {
+    $db->closeConnection();
+    header("Location: student_dashboard.php?msg=Please+select+a+book");
     exit();
 }
 
-// Never trust the submitted book title. The ISBN is the primary key for books,
-// so look up the real book record and use its stored title for the request.
+// ISBN is the only book value accepted from the request button.
+// The title and availability are always read from the database.
 $bookStmt = $conn->prepare("SELECT bookName, quantity FROM books WHERE ISBN = ? LIMIT 1");
 $bookStmt->bind_param("s", $isbn);
 $bookStmt->execute();
@@ -31,7 +31,7 @@ $bookStmt->close();
 
 if (!$book) {
     $db->closeConnection();
-    header("Location: student_dashboard.php?msg=Invalid+ISBN.+Book+not+found");
+    header("Location: student_dashboard.php?msg=Invalid+book+selection");
     exit();
 }
 
@@ -41,22 +41,15 @@ if ((int) $book['quantity'] <= 0) {
     exit();
 }
 
-$correctBookTitle = $book['bookName'];
-
-// If the form was altered or a mismatched title was submitted, reject it.
-if (strcasecmp($bookTitle, $correctBookTitle) !== 0) {
-    $db->closeConnection();
-    header("Location: student_dashboard.php?msg=ISBN+and+book+name+do+not+match");
-    exit();
-}
+$bookTitle = $book['bookName'];
 
 $stmt = $conn->prepare("INSERT INTO requests(student_id,isbn,book_name,status) VALUES(?,?,?,'pending')");
-$stmt->bind_param("sss", $studentID, $isbn, $correctBookTitle);
+$stmt->bind_param("sss", $studentID, $isbn, $bookTitle);
 $ok = $stmt->execute();
 
 $stmt->close();
 $db->closeConnection();
 
-header("Location: student_dashboard.php?msg=" . ($ok ? "Request+submitted" : "Error+submitting+request"));
+header("Location: bookforrequest.php?msg=" . ($ok ? "Request+submitted" : "Error+submitting+request"));
 exit();
 ?>
