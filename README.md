@@ -86,6 +86,47 @@ Library-Management-System/
 
 The project is now organized by responsibility: **admin pages**, **student pages**, **authentication handlers**, **shared PHP/database code**, and **frontend assets** are separated into their own directories.
 
+## 🗄️ Database Design
+
+The database contains four main tables: **admins**, **students**, **books**, and **requests**. Book requests connect students to books through foreign-key relationships.
+
+GitHub can render the ERD directly from the Mermaid source:
+
+[View the Database ERD](docs/ERD.md)
+
+```mermaid
+erDiagram
+    ADMINS {
+        INT ID PK
+        VARCHAR admin_email UK
+        VARCHAR admin_name
+        VARCHAR admin_password_reg
+    }
+    STUDENTS {
+        VARCHAR studentID PK
+        VARCHAR studentName
+        VARCHAR studentEmail
+        VARCHAR studentPassword
+        VARCHAR degree
+    }
+    BOOKS {
+        VARCHAR ISBN PK
+        VARCHAR bookName
+        VARCHAR authorName
+        INT price
+        INT quantity
+    }
+    REQUESTS {
+        INT request_id PK
+        VARCHAR student_id FK
+        VARCHAR isbn FK
+        VARCHAR book_name
+        VARCHAR status
+    }
+    STUDENTS ||--o{ REQUESTS : submits
+    BOOKS ||--o{ REQUESTS : requested_in
+```
+
 ## ⚙️ Requirements
 
 - XAMPP
