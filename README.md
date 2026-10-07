@@ -1,6 +1,6 @@
 # Library Management System
 
-A database-driven Library Management System developed as a university project using PHP, MySQL, HTML, CSS, JavaScript, and XAMPP.
+A full-stack Library Management System built with PHP and MySQL, featuring separate administrator and student workflows, secure session-based authentication, catalogue search, and book-request management.
 
 ![Library Management System](assets/images/lms.png)
 
@@ -56,6 +56,7 @@ Library-Management-System/
 │
 ├── admin/
 │   ├── admin_service_dashboard.php
+│   ├── addAdmin.php
 │   ├── addBook.php
 │   ├── addStudent.php
 │   └── requestsaction.php
@@ -90,8 +91,16 @@ Library-Management-System/
 │       └── unlock.png
 │
 ├── database/
-│   └── lms.sql
+│   ├── lms.sql
+│   └── railway.sql
 │
+├── docs/
+│   └── ERD.md
+│
+├── scripts/
+│   └── create_admin.php
+│
+├── Dockerfile
 ├── index.php
 ├── .gitignore
 └── README.md
@@ -183,11 +192,21 @@ Import:
 database/lms.sql
 ```
 
-The SQL file creates the `lms` database and includes generic demo records.
+The SQL file creates the `lms` database and inserts sample catalogue records. It does not include a default administrator.
 
 > **Important:** The included SQL export resets the academic/demo tables when imported. Back up any local data you want to keep before importing it.
 
-### 4. Run the project
+### 4. Create your first administrator
+
+From the project directory, run the CLI-only setup utility:
+
+```bash
+php scripts/create_admin.php
+```
+
+Enter a name, an email ending in `@admin.library`, and a password of at least 8 characters. The password is stored using PHP's password hashing API. This script refuses web requests and is intended only for initial/local setup.
+
+### 5. Run the project
 
 Open:
 
@@ -202,7 +221,7 @@ The repository includes a `Dockerfile` for container-based PHP/Apache deployment
 - **Local XAMPP:** falls back to `localhost`, MySQL user `root`, and database `lms`.
 - **Railway:** reads `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD`, and `MYSQLDATABASE` from environment variables.
 
-Database credentials are not hard-coded for the hosted environment. For Railway deployment, `database/railway.sql` provides the hosted database initialization schema, while `database/lms.sql` is intended for local XAMPP setup.
+Database credentials are not hard-coded for the hosted environment. The live application uses Railway-managed environment variables. For Railway deployment, `database/railway.sql` provides the hosted database initialization schema, while `database/lms.sql` is intended for local XAMPP setup.
 
 ## 🔐 Security Improvements
 
@@ -216,6 +235,7 @@ The project has been cleaned up to use:
 - Role checks on protected admin/student pages
 - Public administrator self-registration disabled
 - Administrator creation restricted to authenticated administrators
+- CLI-only administrator bootstrap utility for fresh installations
 - UTF-8 / `utf8mb4` database connection
 
 This is still an **academic project**, not a production application. A production deployment would additionally need stronger configuration/secrets management, CSRF protection across all state-changing forms, rate limiting, stricter authorization, logging, and more extensive testing.
@@ -242,8 +262,14 @@ This project demonstrates practical experience with:
 - Role-based workflows
 - HTML, CSS, and JavaScript
 - XAMPP-based local development
+- Docker-based cloud deployment on Railway
 
 ## 👨‍💻 Author
 
 **Muhammad Taha Ahmad**  
 BS Computer Science
+
+
+## 🚧 Current Scope / Future Improvements
+
+This academic portfolio project focuses on authentication, catalogue management, student accounts, and request approval. Potential next improvements include CSRF protection, duplicate-request prevention, inventory quantity updates when requests are approved/returned, pagination, automated tests, and a dedicated borrowing/return history.
