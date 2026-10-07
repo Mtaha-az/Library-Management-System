@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../includes/data_class.php';$email=trim($_POST['admin_email1']??'');$pass=$_POST['admin_password_reg1']??'';if($email===''||$pass===''){header("Location: ../index.php?msg=Please+enter+email+and+password");exit;}$o=new data();$o->setconnection();$o->adminlogin($email,$pass);?>
