@@ -52,7 +52,9 @@ CREATE TABLE requests (
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample catalogue data. No default admin or student credentials are included.\n\nINSERT INTO books (bookName, authorName, price, quantity, ISBN)
+-- Sample catalogue data. No default admin or student credentials are included.
+
+INSERT INTO books (bookName, authorName, price, quantity, ISBN)
 VALUES
 ('Introduction to Algorithms', 'Thomas H. Cormen', 2000, 5, '9780262033848'),
 ('Database System Concepts', 'Abraham Silberschatz', 1800, 4, '9780073523323'),
