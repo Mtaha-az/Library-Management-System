@@ -10,10 +10,24 @@ The system provides separate workflows for **administrators** and **students** t
 
 It demonstrates PHP/MySQL authentication, session-based access, book management, student management, book searching, and book-request approval.
 
+## 🌐 Live Demo
+
+**Live application:** https://library-management-system-production-3547.up.railway.app/
+
+### Student Demo Access
+
+```text
+Student ID: demo001
+Password: Demo123!
+```
+
+The public demo account provides student-level access for exploring the catalogue and book-request workflow. **Administrator credentials are not publicly provided**, and public administrator registration is disabled.
+
 ## ✨ Features
 
 ### Admin
 - Admin login
+- Create additional administrator accounts from the protected admin dashboard
 - Add books and students
 - View, approve, and decline book requests
 - Admin account details dashboard
@@ -22,7 +36,7 @@ It demonstrates PHP/MySQL authentication, session-based access, book management,
 - Student login
 - Student profile dashboard
 - Search books by title
-- Submit book requests
+- Request books directly from catalogue search results
 - View submitted requests
 
 ## 🛠️ Technologies
@@ -188,7 +202,7 @@ The repository includes a `Dockerfile` for container-based PHP/Apache deployment
 - **Local XAMPP:** falls back to `localhost`, MySQL user `root`, and database `lms`.
 - **Railway:** reads `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD`, and `MYSQLDATABASE` from environment variables.
 
-Database credentials are not hard-coded for the hosted environment. The schema in `database/lms.sql` must be imported into the hosted MySQL database when setting up a deployment.
+Database credentials are not hard-coded for the hosted environment. For Railway deployment, `database/railway.sql` provides the hosted database initialization schema, while `database/lms.sql` is intended for local XAMPP setup.
 
 ## 🔐 Security Improvements
 
@@ -200,6 +214,8 @@ The project has been cleaned up to use:
 - Escaped database output with `htmlspecialchars()`
 - Session regeneration after successful login
 - Role checks on protected admin/student pages
+- Public administrator self-registration disabled
+- Administrator creation restricted to authenticated administrators
 - UTF-8 / `utf8mb4` database connection
 
 This is still an **academic project**, not a production application. A production deployment would additionally need stronger configuration/secrets management, CSRF protection across all state-changing forms, rate limiting, stricter authorization, logging, and more extensive testing.
