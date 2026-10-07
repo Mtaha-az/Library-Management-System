@@ -29,15 +29,6 @@ CREATE TABLE books (
   PRIMARY KEY (ISBN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE requests (
-  request_id INT NOT NULL AUTO_INCREMENT,
-  student_id VARCHAR(20) NOT NULL,
-  isbn VARCHAR(20) NOT NULL,
-  book_name VARCHAR(100) NOT NULL,
-  status VARCHAR(20) NOT NULL DEFAULT 'pending',
-  PRIMARY KEY (request_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE students (
   studentID VARCHAR(20) NOT NULL,
   studentName VARCHAR(40) NOT NULL,
@@ -45,6 +36,23 @@ CREATE TABLE students (
   studentPassword VARCHAR(255) NOT NULL,
   degree VARCHAR(20) NOT NULL,
   PRIMARY KEY (studentID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE requests (
+  request_id INT NOT NULL AUTO_INCREMENT,
+  student_id VARCHAR(20) NOT NULL,
+  isbn VARCHAR(20) NOT NULL,
+  book_name VARCHAR(100) NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'pending',
+  PRIMARY KEY (request_id),
+  KEY idx_requests_student_id (student_id),
+  KEY idx_requests_isbn (isbn),
+  CONSTRAINT fk_requests_student
+    FOREIGN KEY (student_id) REFERENCES students(studentID)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT fk_requests_book
+    FOREIGN KEY (isbn) REFERENCES books(ISBN)
+    ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Demo credentials for local testing only.
