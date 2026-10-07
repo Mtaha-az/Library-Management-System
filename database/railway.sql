@@ -52,21 +52,8 @@ CREATE TABLE requests (
     ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Demo credentials for local testing only.
--- Password for both demo accounts: Demo123!
--- Passwords are stored using PHP password_hash().
-
-INSERT INTO admins (admin_email, admin_name, admin_password_reg)
-VALUES ('demo@admin.library', 'Demo Admin', '$2y$12$gzXnQJcsqu8rZbwQFkD9ZuxT4e0EkxaJVMz55TfZfqpYCMON.4c3i');
-
-INSERT INTO students (studentID, studentName, studentEmail, studentPassword, degree)
-VALUES ('demo001', 'Demo Student', 'student@example.com', '$2y$12$gzXnQJcsqu8rZbwQFkD9ZuxT4e0EkxaJVMz55TfZfqpYCMON.4c3i', 'BSCS');
-
-INSERT INTO books (bookName, authorName, price, quantity, ISBN)
+-- Sample catalogue data. No default admin or student credentials are included.\n\nINSERT INTO books (bookName, authorName, price, quantity, ISBN)
 VALUES
 ('Introduction to Algorithms', 'Thomas H. Cormen', 2000, 5, '9780262033848'),
 ('Database System Concepts', 'Abraham Silberschatz', 1800, 4, '9780073523323'),
 ('Computer Networks', 'Andrew S. Tanenbaum', 2200, 3, '9780132126953');
-
-INSERT INTO requests (student_id, isbn, book_name, status)
-VALUES ('demo001', '9780262033848', 'Introduction to Algorithms', 'pending');
