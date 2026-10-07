@@ -1,45 +1,49 @@
 <?php
 session_start();
 include("db.php");
-class data extends db{
-    function __construct(){
-       
-    }
-    function adminlogin($t1,$t2){
 
-        $t2 = md5($t2); // Hash the password before checking
-        $q="SELECT * FROM admins WHERE admin_email='$t1' AND admin_password_reg='$t2'";
-        $recordSet = $this->connection->query($q);
-        if ($recordSet->num_rows > 0) {
-            $row = $recordSet->fetch_assoc(); // Fetch a single row as an associative array
-            $logid = $row["ID"]; // Get the "id" field
-            $_SESSION["adminsid"] = $logid; // Store it in the session
+class data extends db {
+    function __construct() {
+    }
+
+    function adminlogin($email, $password) {
+        $stmt = $this->connection->prepare("SELECT ID, admin_password_reg FROM admins WHERE admin_email = ? LIMIT 1");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row && password_verify($password, $row["admin_password_reg"])) {
+            $_SESSION["adminsid"] = $row["ID"];
+            $stmt->close();
             header("Location: admin_service_dashboard.php?msg=");
             exit();
         }
-        elseif($recordSet->num_rows<= 0)
-        {
-            header("Location:index.php?msg=Invalid login");
-            exit();
-        }
+
+        $stmt->close();
+        header("Location: index.php?msg=Invalid+login");
+        exit();
     }
-    // Student Login
+
     function studentLogin($ID, $password) {
-        // If you hashed the password in the DB as md5:
-        $hashed = md5($password);
+        $stmt = $this->connection->prepare("SELECT studentID, studentPassword FROM students WHERE studentID = ? LIMIT 1");
+        $stmt->bind_param("s", $ID);
+        $stmt->execute();
 
-        $sql = "SELECT * FROM students WHERE studentID='$ID' AND studentPassword='$hashed'";
-        $result = $this->connection->query($sql);
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+        if ($row && password_verify($password, $row["studentPassword"])) {
             $_SESSION["studentsid"] = $row["studentID"];
+            $stmt->close();
             header("Location: student_dashboard.php?msg=WelcomeStudent");
             exit();
-        } else {
-            header("Location: index.php?msg=Invalid+Student+Login");
-            exit();
         }
+
+        $stmt->close();
+        header("Location: index.php?msg=Invalid+Student+Login");
+        exit();
     }
 }
 ?>
