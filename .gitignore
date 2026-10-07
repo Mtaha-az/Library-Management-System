@@ -2,6 +2,11 @@
 xampp/
 *.log
 
+# Environment / local configuration
+.env
+.env.*
+!.env.example
+
 # IDE files
 .vscode/
 .idea/
@@ -9,3 +14,6 @@ xampp/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Archives
+*.zip
