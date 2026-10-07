@@ -1,8 +1,5 @@
-function showAdminLogin(){document.getElementById('student-login').hidden=true;document.getElementById('admin-login').hidden=false;document.getElementById('admin-register').hidden=true}
-function showStudentLogin(){document.getElementById('admin-login').hidden=true;document.getElementById('student-login').hidden=false;document.getElementById('admin-register').hidden=true}
-function showAdminRegister(){document.getElementById('admin-login').hidden=true;document.getElementById('student-login').hidden=true;document.getElementById('admin-register').hidden=false}
+function showAdminLogin(){document.getElementById('student-login').hidden=true;document.getElementById('admin-login').hidden=false}
+function showStudentLogin(){document.getElementById('admin-login').hidden=true;document.getElementById('student-login').hidden=false}
 function assetPath(file){return location.pathname.includes('/admin/')||location.pathname.includes('/student/')?'../assets/images/'+file:'assets/images/'+file}
 function togglePassword(id,imgId){const p=document.getElementById(id),i=document.getElementById(imgId),c=document.getElementById(id+'-checkbox');if(!p||!i||!c)return;p.type=c.checked?'text':'password';i.src=assetPath(c.checked?'unlock.png':'lock.png')}
-function validateEmail(){const e=document.getElementById('admin_email'),m=document.getElementById('email-error');if(!e||!m)return;const ok=/@admin\.library$/.test(e.value);m.hidden=ok||e.value==='';m.textContent=ok?'':'Use an email ending with @admin.library.'}
-function validatePassword(){const p=document.getElementById('admin_password_reg'),c=document.getElementById('admin_confirm_password'),m=document.getElementById('Pass-error');if(!p||!c||!m)return;const ok=p.value===c.value;m.hidden=ok||c.value==='';m.textContent=ok?'':'Passwords do not match.'}
 function showSection(id,b){document.querySelectorAll('.section-panel').forEach(s=>s.hidden=s.id!==id);document.querySelectorAll('.dashboard-nav .nav-btn').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')}
