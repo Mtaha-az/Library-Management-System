@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../includes/data_class.php';$id=trim($_POST['studentID']??'');$pass=$_POST['studentPassword']??'';if($id===''||$pass===''){header("Location: ../index.php?msg=Please+enter+both+student+ID+and+password");exit;}$o=new data();$o->setconnection();$o->studentLogin($id,$pass);?>
