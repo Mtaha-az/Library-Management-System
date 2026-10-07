@@ -146,7 +146,6 @@ INSERT INTO `students` (`studentID`, `studentName`, `studentEmail`, `studentPass
 ('s2021', 'taha', 's2021@gmail.com', 202, 'bscs'),
 ('s2023', 'taha', 's2023@gmail.com', 202, 'bscs'),
 ('s20232', 'taha', 's2023@gmail.com', 202, 'bscs'),
-('s2023266074', 'Aliyan Ahmad', 's2023266074@umt.edu.pk', 827, 'bscs'),
 ('s20233', 'taha', 's20233@gmail.com', 202, 'bscs'),
 ('s20234', 'taha', 's20232@gmail.com', 202, 'bscs'),
 ('s20235', 'taha', 's20235@gmail.com', 202, 'bsse'),
