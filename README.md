@@ -1,40 +1,43 @@
 # Library Management System
 
-A web-based Library Management System developed as a university project using PHP, MySQL, HTML, CSS, JavaScript, and XAMPP.
+A database-driven Library Management System developed as a university project using PHP, MySQL, HTML, CSS, JavaScript, and XAMPP.
+
+![Library Management System](lms.png)
 
 ## 📌 Project Overview
 
-The Library Management System is designed to manage basic library operations through separate functionalities for administrators and students.
+The Library Management System provides separate workflows for **administrators** and **students** to handle basic library operations.
 
-The system allows users to register, log in, search for books, request books, and manage library records.
+The project demonstrates how a PHP web application can connect to a MySQL database and provide authentication, book management, student management, book searching, and book-request workflows.
 
 ## ✨ Features
 
 ### Admin Features
 
-* Admin registration and login
-* Add and manage books
-* Add and manage students
-* View and manage book requests
-* Manage library records through the admin dashboard
+- Admin registration and login
+- Add books
+- Add students
+- View and manage book requests
+- Approve or decline book requests
+- Admin dashboard
 
 ### Student Features
 
-* Student registration and login
-* Student dashboard
-* Search for available books
-* Request books
-* View book-related information
+- Student login
+- Student dashboard
+- Search for books
+- Submit book requests
+- View book-related information
 
 ## 🛠️ Technologies Used
 
-* **PHP** — Backend development
-* **MySQL** — Database management
-* **HTML** — Page structure
-* **CSS** — Styling and layout
-* **JavaScript** — Client-side functionality
-* **XAMPP** — Local development environment
-* **phpMyAdmin** — Database management
+- **PHP** — Server-side application logic
+- **MySQL** — Database management
+- **HTML** — Page structure
+- **CSS** — Styling and layout
+- **JavaScript** — Client-side interactions and form handling
+- **XAMPP** — Local Apache and MySQL development environment
+- **phpMyAdmin** — Database administration
 
 ## 📂 Project Structure
 
@@ -47,7 +50,14 @@ Library-Management-System/
 ├── *.php
 ├── style.css
 ├── script.js
-├── images/
+├── lms.png
+├── lib3.jpg
+├── E1.jpg
+├── lock.png
+├── unlock.png
+├── person.png
+├── persons.jpg
+├── .gitignore
 └── README.md
 ```
 
@@ -55,32 +65,34 @@ Library-Management-System/
 
 Before running the project, install:
 
-* XAMPP
-* A web browser
-* Git (optional, if cloning the repository)
+- XAMPP
+- A modern web browser
+- Git (optional, if cloning the repository)
 
 ## 🚀 Installation and Setup
 
-### 1. Install XAMPP
+### 1. Clone or copy the project
 
-Download and install XAMPP on your computer.
+Clone the repository into the XAMPP `htdocs` directory:
 
-### 2. Copy the Project
+```bash
+git clone https://github.com/Mtaha-az/Library-Management-System.git
+```
 
-Copy the project folder into the XAMPP `htdocs` directory:
+Alternatively, copy the project folder manually into:
 
 ```text
 C:\xampp\htdocs\LMS
 ```
 
-### 3. Start XAMPP
+### 2. Start XAMPP
 
 Open the XAMPP Control Panel and start:
 
-* Apache
-* MySQL
+- Apache
+- MySQL
 
-### 4. Create the Database
+### 3. Create the database
 
 Open phpMyAdmin:
 
@@ -88,13 +100,13 @@ Open phpMyAdmin:
 http://localhost/phpmyadmin
 ```
 
-Create a new database named:
+Create a database named:
 
 ```text
 lms
 ```
 
-### 5. Import the Database
+### 4. Import the database
 
 Select the `lms` database in phpMyAdmin.
 
@@ -110,7 +122,22 @@ database/lms.sql
 
 Then click **Import**.
 
-### 6. Run the Project
+The SQL file creates the required tables and includes sample data for this academic project.
+
+### 5. Check the database configuration
+
+The project uses the following local XAMPP configuration:
+
+```text
+Host: localhost
+Username: root
+Password:
+Database: lms
+```
+
+These settings are intended for a local XAMPP installation.
+
+### 6. Run the project
 
 Open your browser and visit:
 
@@ -118,26 +145,42 @@ Open your browser and visit:
 http://localhost/LMS
 ```
 
-The Library Management System should now be running locally.
+The Library Management System should now run locally.
 
-## 🗄️ Database Configuration
+## 🗄️ Database
 
-The project uses MySQL through XAMPP.
+The database contains tables for:
 
-The default local database configuration is:
+- Administrators
+- Students
+- Books
+- Book requests
+
+The database export is available at:
 
 ```text
-Host: localhost
-Username: root
-Password: 
-Database: lms
+database/lms.sql
 ```
 
-These settings are intended for the local XAMPP development environment.
+## 🔐 Project Scope and Security
+
+This repository contains a **university/academic project** and is not intended for production deployment.
+
+The current version demonstrates the application's functionality but still has areas that would need improvement before production use, including stronger password hashing, prepared SQL statements throughout the application, and additional security validation.
+
+The database contains sample/dummy records used for testing the project.
 
 ## 🎓 Project Purpose
 
-This project was developed as a university project to demonstrate the use of PHP, MySQL, HTML, CSS, and JavaScript in building a database-driven web application.
+This project was developed to demonstrate practical experience with:
+
+- PHP server-side development
+- MySQL database integration
+- CRUD-style database operations
+- Authentication and session handling
+- Role-based application workflows
+- HTML, CSS, and JavaScript
+- Local web application development using XAMPP
 
 ## 👨‍💻 Author
 
