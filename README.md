@@ -13,7 +13,7 @@ It demonstrates PHP/MySQL authentication, session-based access, book management,
 ## ✨ Features
 
 ### Admin
-- Admin registration and login
+- Admin login
 - Add books and students
 - View, approve, and decline book requests
 - Admin account details dashboard
@@ -53,7 +53,6 @@ Library-Management-System/
 │   └── bookforrequest.php
 │
 ├── auth/
-│   ├── register.php
 │   ├── loginadmin_server_page.php
 │   ├── studentLogin_server_page.php
 │   └── logout.php
@@ -191,24 +190,6 @@ The repository includes a `Dockerfile` for container-based PHP/Apache deployment
 
 Database credentials are not hard-coded for the hosted environment. The schema in `database/lms.sql` must be imported into the hosted MySQL database when setting up a deployment.
 
-## 🔑 Demo Accounts
-
-**Admin**
-
-```text
-Email: demo@admin.library
-Password: Demo123!
-```
-
-**Student**
-
-```text
-Student ID: demo001
-Password: Demo123!
-```
-
-These credentials are for the included local/demo database only.
-
 ## 🔐 Security Improvements
 
 The project has been cleaned up to use:
@@ -231,7 +212,7 @@ The interface has been refactored into a shared responsive stylesheet with:
 - Responsive layouts for smaller screens
 - Separate admin and student navigation
 - Cleaner book and request cards
-- Improved login/register layout
+- Improved login layout
 - Centralized colors and spacing using CSS variables
 
 ## 🎓 Project Purpose
