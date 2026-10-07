@@ -182,6 +182,15 @@ Open:
 http://localhost/Library-Management-System/
 ```
 
+## ☁️ Deployment
+
+The repository includes a `Dockerfile` for container-based PHP/Apache deployment. The database connection supports both environments:
+
+- **Local XAMPP:** falls back to `localhost`, MySQL user `root`, and database `lms`.
+- **Railway:** reads `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD`, and `MYSQLDATABASE` from environment variables.
+
+Database credentials are not hard-coded for the hosted environment. The schema in `database/lms.sql` must be imported into the hosted MySQL database when setting up a deployment.
+
 ## 🔑 Demo Accounts
 
 **Admin**
