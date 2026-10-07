@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <?php
@@ -32,7 +32,7 @@ if(!empty($_REQUEST['msg2'])){
             </div>
             <div class="input-container">
                 <img src="lock.png" id="student-lock" alt="Password Icon">
-                <input type="password" id="student-password" placeholder="Password" required id="studentPassword" name="studentPassword">
+                <input type="password" id="studentPassword" placeholder="Password" required name="studentPassword">
             </div>
             <div class="checkbox-container">
                 <input type="checkbox" id="student-password-checkbox" onclick="togglePassword('student-password', 'student-lock')">
@@ -58,7 +58,7 @@ if(!empty($_REQUEST['msg2'])){
             </div>
             <div class="input-container">
                 <img src="lock.png" id="admin-lock" alt="Password Icon">
-                <input type="password" id="admin-password" placeholder="Password" required name="admin_password_reg1" id="admin_password_reg1">
+                <input type="password" id="admin_password_reg1" placeholder="Password" required name="admin_password_reg1">
             </div>
             <div class="checkbox-container">
                 <input type="checkbox" id="admin-password-checkbox" onclick="togglePassword('admin-password', 'admin-lock')">
@@ -101,7 +101,7 @@ if(!empty($_REQUEST['msg2'])){
         <button onclick="showAdminLogin()">Back to Login</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </body>
 </html>
