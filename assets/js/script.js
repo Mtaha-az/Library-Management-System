@@ -25,10 +25,10 @@ function togglePassword(inputId, imgId) {
 
     if (checkbox.checked) {
         passwordInput.type = "text"; // Show password
-        lockImage.src = "unlock.png"; // Change to unlock image
+        lockImage.src = "../../unlock.png"; // Change to unlock image
     } else {
         passwordInput.type = "password"; // Hide password
-        lockImage.src = "lock.png"; // Change back to lock image
+        lockImage.src = "../../lock.png"; // Change back to lock image
     }
 }
 function validateEmail() {
