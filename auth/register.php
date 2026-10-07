@@ -1,2 +1,7 @@
 <?php
-require_once __DIR__.'/../includes/db.php';$db=new db();$db->setconnection();$c=$db->getConnection();$name=trim($_POST['admin_name']??'');$email=trim($_POST['admin_email']??'');$pass=$_POST['admin_password_reg']??'';$confirm=$_POST['admin_confirm_password']??'';if($name===''||$email===''||$pass===''){header("Location: ../index.php?msg=All+fields+are+required");exit;}if(!filter_var($email,FILTER_VALIDATE_EMAIL)||!preg_match('/@admin\.library$/',$email)){header("Location: ../index.php?msg=Invalid+admin+email");exit;}if($pass!==$confirm){header("Location: ../index.php?msg2=Passwords+do+not+match");exit;}$hash=password_hash($pass,PASSWORD_DEFAULT);$s=$c->prepare("INSERT INTO admins(admin_email,admin_name,admin_password_reg) VALUES(?,?,?)");$s->bind_param("sss",$email,$name,$hash);$ok=$s->execute();$s->close();$db->closeConnection();header("Location: ../index.php?".($ok?"msg1=Registered+Successfully":"msg=Unable+to+register"));exit;?>
+// Public admin self-registration is disabled.
+// Admin accounts for this academic project should be provisioned directly
+// by the database owner rather than created by anonymous visitors.
+header("Location: ../index.php?msg=Admin+registration+is+disabled");
+exit();
+?>
