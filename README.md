@@ -196,15 +196,15 @@ The SQL file creates the `lms` database and inserts sample catalogue records. It
 
 > **Important:** The included SQL export resets the academic/demo tables when imported. Back up any local data you want to keep before importing it.
 
-### 4. Create your first administrator
+### 4. Initial Administrator Setup (Local Installation)
 
-From the project directory, run the CLI-only setup utility:
+For a **fresh local installation**, run the CLI-only setup utility from the project directory. Existing local admin accounts do not need to run this again:
 
 ```bash
 php scripts/create_admin.php
 ```
 
-Enter a name, an email ending in `@admin.library`, and a password of at least 8 characters. The password is stored using PHP's password hashing API. This script refuses web requests and is intended only for initial/local setup.
+Enter a name, an email ending in `@admin.library`, and a password of at least 8 characters. The password is stored using PHP's password hashing API. Password entry is hidden in supported terminals. This script refuses web requests and is intended only for initial/local setup; it does not create accounts on the deployed Railway database.
 
 ### 5. Run the project
 
