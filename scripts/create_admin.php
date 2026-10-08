@@ -12,11 +12,36 @@ $db = new db();
 $db->setconnection();
 $conn = $db->getConnection();
 
+function readSecret(string $prompt): string {
+    echo $prompt;
+    if (DIRECTORY_SEPARATOR === '\\') {
+        // Windows: use PowerShell's secure prompt and return plaintext only in memory.
+        $command = 'powershell.exe -NoProfile -Command "$p=Read-Host -AsSecureString; $b=[Runtime.InteropServices.Marshal]::SecureStringToBSTR($p); try {[Runtime.InteropServices.Marshal]::PtrToStringBSTR($b)} finally {[Runtime.InteropServices.Marshal]::ZeroFreeBSTR($b)}"';
+        $value = shell_exec($command);
+        if ($value === null) {
+            exit("Unable to read hidden password. Use a terminal with PowerShell available.\n");
+        }
+        return rtrim($value, "\r\n");
+    }
+    $mode = shell_exec('stty -g');
+    if ($mode === null || trim($mode) === '') {
+        exit("A terminal supporting hidden input is required.\n");
+    }
+    system('stty -echo');
+    try {
+        $value = fgets(STDIN);
+    } finally {
+        system('stty ' . escapeshellarg(trim($mode)));
+        echo "\n";
+    }
+    return rtrim((string)$value, "\r\n");
+}
+
 echo "Create LMS administrator\n";
 $name = trim(readline("Name: "));
 $email = trim(readline("Admin email (must end with @admin.library): "));
-$password = readline("Password (minimum 8 characters): ");
-$confirm = readline("Confirm password: ");
+$password = readSecret("Password (minimum 8 characters): ");
+$confirm = readSecret("Confirm password: ");
 
 if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@admin\.library$/i', $email)) {
     exit("Invalid name or admin email.\n");
